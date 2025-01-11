@@ -1,6 +1,9 @@
+import { useLocation } from "react-router";
 
 
 const FactsSection = () => {
+  const location = useLocation()
+
   const facts = [
     {
       title: "Artigianale",
@@ -23,7 +26,8 @@ const FactsSection = () => {
     <section className="py-4 md:py-16 bg-gray-50">
       {/* Section Title */}
       <div className="text-center mb-6 md:mb-12">
-        <h2 className="text-2xl md:text-5xl font-bold font-gilroy">3 Facts About WORTEES</h2>
+        {location.pathname === "/product-details" ? (<h2 className="text-2xl md:text-5xl font-bold font-gilroy">Perchè Scegliere Wortees.</h2>) : (<h2 className="text-2xl md:text-5xl font-bold font-gilroy">3 Facts About WORTEES</h2>)}
+
       </div>
 
       {/* Facts Grid */}

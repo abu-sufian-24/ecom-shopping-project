@@ -1,15 +1,15 @@
-import { useNavigate } from "react-router"
-
+import { Link, useLocation, useNavigate } from "react-router"
 import { ProductData } from "../data/productData"
 
 
 
 
+
 function Product() {
+
   const products = ProductData()
-
+  const location = useLocation();
   const navigate = useNavigate()
-
 
   const handleClick = (product) => {
     navigate("/product-details", { state: { product } });
@@ -19,7 +19,13 @@ function Product() {
     <section className="py-16 px-4 md:px-12 bg-custom-gradient">
       {/* Section Title */}
       <div className="text-center mb-8">
-        <h2 className="text-3xl md:text-5xl font-bold mb-10">In Evidenza</h2>
+        {location.pathname === "/product-details" ? (
+          <h1 className="text-3xl md:text-5xl font-bold mb-10">
+            And Have You Already Seen These?
+          </h1>
+        ) : (
+          <h1 className="text-3xl md:text-5xl font-bold mb-10">In Evidenza</h1>
+        )}
       </div>
 
       {/* Product Grid */}
@@ -49,19 +55,20 @@ function Product() {
             </div>
 
             {/* Price & Add to Cart */}
-            <div className="mt-6 flex justify-between items-center border px-4 py-2 rounded-md hover:text-white hover:bg-red-600">
-              <button className=" text-[#212121] hover:text-white ">
+            <div className="mt-6 flex justify-between items-center border px-4 py-2 rounded-md group hover:text-white hover:bg-red-600">
+              <button className="text-[#212121] group-hover:text-white">
                 ADD TO CART
               </button>
-              <span className="text-lg font-bold">{product.price}</span>
+              <span className="text-lg font-bold group-hover:text-white">{product.price}</span>
             </div>
+
           </div>
         ))}
       </div>
-      <div className="text-center mt-4">
-        <button className="bg-[#A81A18] text-white px-8 py-3 mt-6 rounded-lg hover:bg-red-600">
+      <div className="text-center mt-10">
+        <Link to={"/view-product"} className="bg-[#A81A18] text-white px-8 py-3  rounded-lg hover:bg-red-600">
           Vedi  tutte →
-        </button>
+        </Link>
       </div>
     </section>
   );

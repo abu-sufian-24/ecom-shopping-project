@@ -7,6 +7,8 @@ import img3 from "../assets/images/pro-d.png"
 import img4 from "../assets/images/pro-d3.png"
 import ProductDetailTable from "../component/productDetails/producDetailTaible";
 import Features from "../component/productDetails/Features";
+import { Product } from "../component/Product";
+import FactsSection from "../component/FactsSection";
 
 
 
@@ -44,8 +46,6 @@ function ProductDetails() {
 
     }
   ]
-
-
 
   return (
     <>
@@ -181,6 +181,8 @@ function ProductDetails() {
       </div>
       <ProductDetailTable />
       <Features />
+      <FactsSection />
+      <Product />
 
     </>
 
