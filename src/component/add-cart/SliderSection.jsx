@@ -95,40 +95,43 @@ function SliderSection() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto py-8">
-
-      <h2 className="text-4xl font-bold mb-8">Recently viewed</h2>
+    <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 text-center sm:text-left">
+        Recently Viewed
+      </h2>
 
       <Swiper
         modules={[Navigation, Autoplay]}
         spaceBetween={20}
-        slidesPerView={5}
         autoplay={{
           delay: 3000,
           disableOnInteraction: false,
         }}
         breakpoints={{
-          640: { slidesPerView: 1 },
-          768: { slidesPerView: 2 },
+          320: { slidesPerView: 1 },
+          480: { slidesPerView: 2 },
+          768: { slidesPerView: 3 },
           1024: { slidesPerView: 4 },
+          1280: { slidesPerView: 4 },
         }}
         className="swiper-container"
       >
         {items.map((item) => (
           <SwiperSlide key={item.id}>
-            <div className="border rounded-lg shadow-md p-4 bg-white  flex gap-4 items-center">
-              <div>
+            <div className="border rounded-lg shadow-md p-4 bg-white flex flex-col sm:flex-row gap-4 items-center">
+              {/* Image Section */}
+              <div className="w-full sm:w-auto">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-52  object-cover rounded-md mb-4"
+                  className="w-full sm:w-52 object-cover rounded-md"
                 />
               </div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-800">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-gray-500 mb-2">{item.description}</p>
+
+              {/* Text Section */}
+              <div className="text-center sm:text-left">
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">{item.title}</h3>
+                <p className="text-sm text-gray-500 mb-4">{item.description}</p>
                 <span className="text-red-500 text-lg font-bold">{item.price}</span>
               </div>
             </div>

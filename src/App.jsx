@@ -6,12 +6,15 @@ import ViewProduct from "./page/ViewProduct"
 import BestCollection from "./page/BestCollection"
 import Contact from "./page/Contact"
 import AddToCart from "./page/AddToCart"
+import Checkout from "./page/Checkout"
+
 
 
 function App() {
 
   return (
     <>
+
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -21,9 +24,11 @@ function App() {
             <Route path="best-collection" element={<BestCollection />} />
             <Route path="contact" element={<Contact />} />
             <Route path="cart" element={<AddToCart />} />
+            <Route path="checkout" element={<Checkout />} />
           </Route>
         </Routes>
       </BrowserRouter>
+
     </>
   )
 }
