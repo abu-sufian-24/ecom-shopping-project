@@ -11,14 +11,15 @@ import img9 from "../assets/images/mobile2.png"
 
 function Banner() {
   return (
-    <section className="relative  bg-custom-gradient py-12 px-4 md:px-12">
+    <section className="relative  py-12 px-4 md:px-12">
       {/* Heading and Text */}
       <div className="text-center relative">
-        < img
-          className="absolute top-3 right-6 opacity-10 md:opacity-95 md:top-3 md:left-3/4"
+        <img
+          className="absolute hidden md:block top-3 right-6 opacity-10 md:opacity-95 md:top-3 md:left-3/4 animate-spin-slow"
           src={logo}
           alt="Logo"
         />
+
         <p className="text-xl md:text-2xl font-gilroy uppercase tracking-wide text-[#0F0F0F]">
           It's Not Just A T-Shirt
         </p>
@@ -99,8 +100,9 @@ function Banner() {
 
       {/* mobile design */}
       <div className=" relative md:hidden pb-[300px]">
-        <div className="absolute top-8 right-32 z-0">
+        <div className="absolute top-8 right-32 z-0 ">
           <img
+            className="animate-spin-slow"
             src={logo}
             alt="Bottom Right"
 

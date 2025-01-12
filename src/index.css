@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply bg-custom-gradient;
+}
+
 @font-face {
   font-family: 'Gilroy';
   src: url('./assets/fonts/Gilroy-Regular.woff2') format('woff2'),

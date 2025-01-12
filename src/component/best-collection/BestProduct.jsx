@@ -1,39 +1,17 @@
-import { Link, useLocation, useNavigate } from "react-router"
-import { ProductData } from "../data/productData"
+import { ProductData1 } from "../../data/productData"
 
 
+function BestProduct() {
 
-
-
-function Product() {
-
-  const products = ProductData()
-  const location = useLocation();
-  const navigate = useNavigate()
-
-  const handleClick = (product) => {
-    navigate("/product-details", { state: { product } });
-  };
-
+  const products = ProductData1()
   return (
-    <section className="py-16 px-4 md:px-12">
-      {/* Section Title */}
-      <div className="text-center mb-8">
-        {location.pathname === "/product-details" ? (
-          <h1 className="text-3xl md:text-5xl font-bold mb-10">
-            And Have You Already Seen These?
-          </h1>
-        ) : (
-          <h1 className="text-3xl md:text-5xl font-bold mb-10">In Evidenza</h1>
-        )}
-      </div>
-
+    <div className=" py-4 md:py-24 px-10">
+      <h2 className=" text-2xl md:text-4xl text-center font-bold mb-4 md:mb-14">Best Collection</h2>
       {/* Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {products.map((product) => (
           <div
             key={product.id}
-            onClick={() => handleClick(product)}
             className="relative p-4 rounded-lg shadow-md border bg-white hover:border-red-500 transition-colors "
           >
             {/* Product Image */}
@@ -65,16 +43,8 @@ function Product() {
           </div>
         ))}
       </div>
-      <div className="text-center mt-10">
-        <Link to={"/view-product"} className="bg-[#A81A18] text-white px-8 py-3  rounded-lg hover:bg-red-600">
-          Vedi  tutte →
-        </Link>
-      </div>
-    </section>
-  );
-};
+    </div>
+  )
+}
 
-
-
-
-export { Product }
+export default BestProduct

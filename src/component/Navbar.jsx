@@ -11,7 +11,7 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-[#FFF7E5] border-dashed border-b-2">
+    <nav className=" border-dashed border-b-2">
       <div className="flex justify-between items-center px-4 py-3 md:justify-around">
         {/* Logo */}
         <div className="flex items-center">
@@ -21,11 +21,14 @@ function Navbar() {
           >
             <AiOutlineMenuFold />
           </button>
-          <img
-            src={logo}
-            alt="Logo"
-            className="h-8 ml-4 md:ml-0 md:h-10"
-          />
+          <Link to={"/"}>
+            <img
+              src={logo}
+              alt="Logo"
+              className="h-8 ml-4 md:ml-0 md:h-10"
+            />
+          </Link>
+
         </div>
 
         {/* Desktop Menu */}
@@ -33,7 +36,7 @@ function Navbar() {
           <Link to={"/"} className="text-lg">
             Manifesto
           </Link>
-          <Link to={"/product"} className="text-lg">
+          <Link to={"/best-collection"} className="text-lg">
             Collezione
           </Link>
           <Link to={"/contact"} className="text-lg">
@@ -75,7 +78,7 @@ function Navbar() {
             Manifesto
           </Link>
           <Link
-            to={"/product"}
+            to={"/best-collection"}
             className="block py-2 text-lg border-b border-gray-200"
             onClick={() => setMenuOpen(false)}
           >
