@@ -61,8 +61,11 @@ function Navbar() {
           <FaRegHeart className="ml-4 text-xl hidden md:block" />
           <span className="ml-4 text-lg hidden md:inline">|</span>
           <div className="flex items-center relative">
-            <AiTwotoneShopping className="ml-4 text-2xl" />
-            <span className=" text-sm w-5 h-5 bg-red-600 text-white rounded-full text-center absolute top-[-5px] left-8">1</span>
+            <Link to={"/cart"}>
+              <AiTwotoneShopping className="ml-4 text-2xl" />
+              <span className=" text-sm w-5 h-5 bg-red-600 text-white rounded-full text-center absolute top-[-5px] left-8">1</span>
+            </Link>
+
           </div>
         </div>
       </div>
