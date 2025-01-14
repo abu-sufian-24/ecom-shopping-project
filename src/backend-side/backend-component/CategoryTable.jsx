@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router";
 
 function Table() {
+
   const [categories, setCategories] = useState([
     {
       id: "-OEh7LObKFqs9AYxdm8o",
@@ -19,6 +20,8 @@ function Table() {
       name: "panjabi",
     },
   ]);
+
+
 
   const handleDelete = (id) => {
     setCategories(categories.filter((category) => category.id !== id));

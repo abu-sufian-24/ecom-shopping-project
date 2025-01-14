@@ -33,6 +33,7 @@ function App() {
               <Route path="category" element={<IndexCategory />} />
               <Route path="product" element={<IndexProduct />} />
               <Route path="create-product" element={<CreateProduct />} />
+              <Route path="edit-product/:id" element={<CreateProduct />} />
               <Route path="create-category" element={<CreateCategory />} />
             </Route>
           </Route>

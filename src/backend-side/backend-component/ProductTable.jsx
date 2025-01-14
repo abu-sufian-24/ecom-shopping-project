@@ -1,35 +1,60 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 function ProductTable() {
-  const [products, setProducts] = useState([
-    {
-      id: "-OEh7LObKFqs9AYxdm8o",
-      imageUrl: "https://i.postimg.cc/xTF1Cgr1/download.png",
-      name: "t-shirt",
-      price: "$30",
-      productCategory: "	t-shirt"
-    },
-    {
-      id: "-OErJxOQUbnfmluE73_F",
-      imageUrl: "https://i.postimg.cc/xTF1Cgr1/download.png",
-      name: "panjabi",
-      price: "$30",
-      productCategory: "	t-shirt"
-    },
-    {
-      id: "-OErJxOQUbnfmluE73_F",
-      imageUrl: "https://i.postimg.cc/xTF1Cgr1/download.png",
-      name: "panjabi",
-      price: "$30",
-      productCategory: "	t-shirt"
-    },
-  ]);
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+    fetch("http://localhost:5000/shops")
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data)
+      })
+  }, [])
 
   const handleDelete = (id) => {
-    setProducts(products.filter((category) => category.id !== id));
-  };
+
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        fetch(`http://localhost:5000/shop/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+
+              const newData = products.filter((product => product._id !== id))
+              setProducts(newData)
+              Swal.fire({
+
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+              });
+            }
+
+          })
+
+      }
+    });
+
+
+
+  }
+
+
 
   return (
     <div className="p-6 bg-white rounded-md shadow-md overflow-x-auto">
@@ -61,10 +86,13 @@ function ProductTable() {
               Product Image URL
             </th>
             <th className="px-4 py-3 text-left text-sm md:text-base">
-              Product Category
+              Product Description
             </th>
             <th className="px-4 py-3 text-left text-sm md:text-base">
               Product Name
+            </th>
+            <th className="px-4 py-3 text-left text-sm md:text-base">
+              Product label
             </th>
             <th className="px-4 py-3 text-left text-sm md:text-base">
               Product Price
@@ -75,38 +103,44 @@ function ProductTable() {
           </tr>
         </thead>
         <tbody>
-          {products.map((category) => (
-            <tr key={category.id} className="border-b">
-              <td className="px-4 py-3 text-sm md:text-base">{category.id}</td>
+          {products.map((product) => (
+            <tr key={product._id} className="border-b">
+              <td className="px-4 py-3 text-sm md:text-base">{product._id}</td>
               <td className="px-4 py-3 text-sm md:text-base">
                 <a
-                  href={category.imageUrl}
+                  href={product.photo}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-500 underline break-all"
                 >
-                  {category.imageUrl}
+                  {product.photo}
                 </a>
               </td>
               <td className="px-4 py-3 text-sm md:text-base">
-                {category.productCategory}
+                {product.category}
               </td>
               <td className="px-4 py-3 text-sm md:text-base">
-                {category.name}
+                {product.name}
               </td>
               <td className="px-4 py-3 text-sm md:text-base">
-                {category.price}
+                {product.label}
+              </td>
+              <td className="px-4 py-3 text-sm md:text-base">
+                {product.price}
               </td>
               <td className="px-4 py-3 flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0 md:space-x-2">
+                <Link to={`/dashboard/edit-product/${product._id}`}>
+                  <button
+                    className="flex items-center bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 text-sm md:text-base"
+                  >
+                    Edit
+                  </button>
+                </Link>
+
                 <button
-                  className="flex items-center bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 text-sm md:text-base"
-                  onClick={() => alert(`Edit ${category.name}`)}
-                >
-                  Edit
-                </button>
-                <button
+                  onClick={() => handleDelete(product._id)}
                   className="flex items-center bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 text-sm md:text-base"
-                  onClick={() => handleDelete(category.id)}
+
                 >
                   Delete
                 </button>

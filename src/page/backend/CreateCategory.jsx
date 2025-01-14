@@ -8,24 +8,14 @@ function CreateCategory() {
     e.preventDefault()
 
     const name = e.target.name.value
-    const chef = e.target.chef.value
-    const supplier = e.target.supplier.value
-    const taste = e.target.taste.value
-    const category = e.target.category.value
-    const details = e.target.details.value
     const photo = e.target.photo.value
-    const price = e.target.price.value
+
 
 
     const coffeeObject = {
       name,
-      chef,
-      supplier,
-      taste,
-      category,
-      details,
       photo,
-      price
+
     }
     console.log(coffeeObject);
 

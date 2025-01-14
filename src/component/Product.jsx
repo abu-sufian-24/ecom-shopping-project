@@ -1,15 +1,25 @@
 import { Link, useLocation, useNavigate } from "react-router"
-import { ProductData } from "../data/productData"
+import { useEffect, useState } from "react";
+
 
 
 
 
 
 function Product() {
-
-  const products = ProductData()
+  const [products, setProducts] = useState()
   const location = useLocation();
   const navigate = useNavigate()
+
+  useEffect(() => {
+    fetch("http://localhost:5000/shops")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+
+        setProducts(data)
+      })
+  }, [])
 
   const handleClick = (product) => {
     navigate("/product-details", { state: { product } });
@@ -30,16 +40,16 @@ function Product() {
 
       {/* Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products.map((product) => (
+        {products?.map((product) => (
           <div
-            key={product.id}
+            key={product._id}
             onClick={() => handleClick(product)}
             className="relative p-4 rounded-lg shadow-md border bg-white hover:border-red-500 transition-colors "
           >
             {/* Product Image */}
             <img
-              src={product.img}
-              alt={product.title}
+              src={product.photo}
+              alt={product.name}
               className="w-full h-auto rounded-md"
             />
 
@@ -50,7 +60,7 @@ function Product() {
 
             {/* Product Info */}
             <div className="mt-4">
-              <h3 className="text-lg font-semibold">{product.title}</h3>
+              <h3 className="text-lg font-semibold">{product.name}</h3>
               <p className="text-sm text-gray-500">{product.description}</p>
             </div>
 
@@ -59,7 +69,7 @@ function Product() {
               <button className="text-[#212121] group-hover:text-white">
                 ADD TO CART
               </button>
-              <span className="text-lg font-bold group-hover:text-white">{product.price}</span>
+              <span className="text-lg font-bold group-hover:text-white">${product.price}</span>
             </div>
 
           </div>

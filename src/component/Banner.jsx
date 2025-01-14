@@ -11,7 +11,7 @@ import img9 from "../assets/images/mobile2.png"
 
 function Banner() {
   return (
-    <section className="relative  py-12 px-4 md:px-12">
+    <section className="relative  py-12 px-4 md:px-12 md:mt-16">
       {/* Heading and Text */}
       <div className="text-center relative">
         <img
