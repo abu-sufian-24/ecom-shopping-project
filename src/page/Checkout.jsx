@@ -6,7 +6,7 @@ import { MdNavigateNext } from "react-icons/md";
 const Checkout = () => {
   return (
 
-    <div className=" py-10">
+    <div className=" py-10 mt-12">
       <h2 className="text-center text-4xl font-bold pb-10">Checkout</h2>
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Billing Details */}

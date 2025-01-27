@@ -4,18 +4,16 @@ import { useEffect, useState } from "react";
 
 
 
-
-
 function Product() {
   const [products, setProducts] = useState()
   const location = useLocation();
   const navigate = useNavigate()
 
+
   useEffect(() => {
     fetch("http://localhost:5000/shops")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
 
         setProducts(data)
       })
@@ -24,6 +22,7 @@ function Product() {
   const handleClick = (product) => {
     navigate("/product-details", { state: { product } });
   };
+
 
   return (
     <section className="py-16 px-4 md:px-12">
@@ -39,12 +38,12 @@ function Product() {
       </div>
 
       {/* Product Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ">
         {products?.map((product) => (
           <div
             key={product._id}
             onClick={() => handleClick(product)}
-            className="relative p-4 rounded-lg shadow-md border bg-white hover:border-red-500 transition-colors "
+            className="relative p-4 rounded-lg shadow-md border bg-white hover:border-red-500 transition-colors cursor-pointer"
           >
             {/* Product Image */}
             <img
@@ -65,11 +64,11 @@ function Product() {
             </div>
 
             {/* Price & Add to Cart */}
-            <div className="mt-6 flex justify-between items-center border px-4 py-2 rounded-md group hover:text-white hover:bg-red-600">
-              <button className="text-[#212121] group-hover:text-white">
-                ADD TO CART
+            <div className="mt-6 flex justify-between items-center border px-4 py-2 rounded-md group">
+              <button className="text-[#212121] ">
+                View Details
               </button>
-              <span className="text-lg font-bold group-hover:text-white">${product.price}</span>
+              <span className="text-lg font-bold ">${product.price}</span>
             </div>
 
           </div>
@@ -83,8 +82,6 @@ function Product() {
     </section>
   );
 };
-
-
 
 
 export { Product }

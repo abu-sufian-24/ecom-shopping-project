@@ -5,7 +5,7 @@ import MainSection from "../component/productDetails/viewProduct/MainSection";
 
 function ViewProduct() {
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-10">
       <h1 className="text-3xl text-center mt-8 sm:mt-14">Prodotti</h1>
       <div className="flex flex-col sm:flex-row sm:justify-between items-center mb-6 sm:mb-10">
         <p className="mb-4 sm:mb-0">Showing 1-12 of 20 results</p>

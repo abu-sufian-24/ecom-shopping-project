@@ -1,6 +1,10 @@
+import { useContext } from "react";
+import { AuthContext } from "../../context";
 
 
 function HomeLayout() {
+
+  const { products } = useContext(AuthContext)
   return (
     <div className="grid grid-cols-12 gap-4">
       <div className="col-span-4 border shadow-sm p-3 rounded">
@@ -9,7 +13,7 @@ function HomeLayout() {
       </div>
       <div className="col-span-4 border shadow-sm p-3 rounded">
         <span>Total Products</span>
-        <h2 className="text-2xl font-semibold">20</h2>
+        <h2 className="text-2xl font-semibold">{products.length}</h2>
       </div>
       <div className="col-span-4 border shadow-sm p-3 rounded">
         <span>Total Users</span>

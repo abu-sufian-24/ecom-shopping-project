@@ -5,7 +5,7 @@ import { FaTwitterSquare } from "react-icons/fa";
 
 function Contact() {
   return (
-    <div className="py-5 md:py-20">
+    <div className="py-5 md:py-20 ">
       <h2 className="text-2xl md:text-4xl text-center font-bold text-black pb-7">Write to Us to
         Say Hello or For Information!</h2>
 

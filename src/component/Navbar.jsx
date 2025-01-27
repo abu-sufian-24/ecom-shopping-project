@@ -4,14 +4,28 @@ import flag from "../assets/images/italyflag.png";
 import { FaRegHeart } from "react-icons/fa";
 import { AiTwotoneShopping, AiOutlineMenuFold } from "react-icons/ai";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../context";
+import Avatar from "react-avatar";
+import { toast } from "react-toastify";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user, logOut } = useContext(AuthContext)
+
+  const handleLogOut = () => {
+    logOut().then((result) => {
+      console.log(result)
+      toast.success("LogOut success")
+    })
+      .catch((error) => {
+        toast.error(error.message)
+      });
+  }
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
-      <div className="flex justify-between items-center px-4 py-3 md:justify-around">
+      <div className="flex justify-between items-center px-4 py-3 md:justify-between md:px-10">
         {/* Logo and Mobile Menu Button */}
         <div className="flex items-center">
           <button
@@ -63,6 +77,34 @@ function Navbar() {
               </span>
             </Link>
           </div>
+          {
+            user && (<>
+              <span className="ml-4"><Avatar size="40" name={user?.email} /></span>
+              <button
+                onClick={handleLogOut}
+                className="ml-2 bg-red-500 text-white"
+              >
+                <svg
+                  className="logout-bnt-logo "
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M20 12H8m12 0-4 4m4-4-4-4M9 4H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h2"
+                  />
+                </svg>
+              </button>
+            </>)
+
+          }
         </div>
       </div>
 

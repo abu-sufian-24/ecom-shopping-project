@@ -14,6 +14,8 @@ import HomeLayout from "./page/backend/HomeLayout"
 import IndexProduct from "./page/backend/IndexProduct"
 import CreateProduct from "./page/backend/CreateProduct"
 import CreateCategory from "./page/backend/CreateCategory"
+import Login from "./page/auth-page/Login"
+import Register from "./page/auth-page/Register"
 
 
 
@@ -38,6 +40,7 @@ function App() {
             </Route>
           </Route>
 
+
           {/* Public Routes */}
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
@@ -47,6 +50,8 @@ function App() {
             <Route path="contact" element={<Contact />} />
             <Route path="cart" element={<AddToCart />} />
             <Route path="checkout" element={<Checkout />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaHeart, FaMinus, FaPlus } from "react-icons/fa";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import img1 from "../assets/images/pro-d1.png"
 import img2 from "../assets/images/pro-d2.png"
 import img3 from "../assets/images/pro-d.png"
@@ -9,24 +9,29 @@ import ProductDetailTable from "../component/productDetails/producDetailTaible";
 import Features from "../component/productDetails/Features";
 import { Product } from "../component/Product";
 import FactsSection from "../component/FactsSection";
+import { AuthContext } from "../context";
 
 
 
 
 function ProductDetails() {
 
-
+  const navigate = useNavigate()
   const location = useLocation();
   const product = location.state?.product;
-
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
-
   const handleIncrement = () => setQuantity(quantity + 1);
+  const { user } = useContext(AuthContext)
+
+
+
   const handleDecrement = () => {
     if (quantity > 1) setQuantity(quantity - 1);
   };
+
+
 
   const prodImage = [
     {
@@ -47,14 +52,40 @@ function ProductDetails() {
     }
   ]
 
+
+
+
+  const handleAddToCart = (e, product) => {
+    e.stopPropagation()
+    if (!user) {
+      navigate("/login")
+      return;
+    }
+
+
+    const cartData = {
+      email: user.email,
+      name: product.name,
+      photo: product.photo,
+      description: product.description,
+      quantity,
+      selectedColor,
+      selectedSize
+
+    }
+    console.log(cartData);
+
+
+  }
+
   return (
     <>
-      <div className="container mx-auto p-6 md:flex md:gap-12 bg-gray-50">
+      <div className="container mx-auto p-6 md:flex md:gap-12 bg-gray-50 mt-20">
         {/* Left Section */}
         <div className="md:w-1/2">
           <div className="border rounded-md p-4">
             <img
-              src={product?.img}
+              src={product?.photo}
               alt="Product"
               className="w-full"
             />
@@ -76,7 +107,7 @@ function ProductDetails() {
         <div className="md:w-1/2">
           {/* Title and Reviews */}
           <div>
-            <h2 className="text-3xl font-bold">{product.title}</h2>
+            <h2 className="text-3xl font-bold">{product.name}</h2>
             <p className="text-red-500 mt-2">{product.description}</p>
             <div className="flex items-center gap-2 mt-2">
               <div className="text-yellow-500 text-lg">★★★★★</div>
@@ -163,7 +194,7 @@ function ProductDetails() {
 
           {/* Add to Cart Button */}
           <div className="mt-6">
-            <button className="w-full py-3 bg-red-500 text-white font-semibold rounded-md hover:bg-red-600 flex items-center justify-center gap-2">
+            <button onClick={(e) => handleAddToCart(e, product)} className="w-full py-3 bg-red-500 text-white font-semibold rounded-md hover:bg-red-600 flex items-center justify-center gap-2">
               <span>ADD TO CART</span>
             </button>
             <button className="w-full py-3 mt-4 border rounded-md flex items-center justify-center gap-2 hover:bg-gray-100">
